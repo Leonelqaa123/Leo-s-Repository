@@ -16,18 +16,17 @@
         }
         
         h1 { 
-            color: #00fff5; /* Letras color cyan neón */
+            color: #00fff5; 
             text-shadow: 0 0 10px #00fff580;
         }
 
-        /* Estilo de la "Caja" donde va el juego */
         .game-container {
-            max-width: 800px; /* Ancho máximo del juego */
-            margin: 0 auto; /* Centrar la caja */
+            max-width: 800px;
+            margin: 0 auto; 
             background-color: #16213e;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5); /* Sombra para que resalte */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
         }
 
         iframe {
@@ -52,7 +51,7 @@
         }
 
         .fullscreen-btn:hover {
-            background-color: #ff5270; /* Brillo al pasar el ratón */
+            background-color: #ff5270; 
         }
     </style>
 </head>
@@ -68,16 +67,15 @@
         <button class="fullscreen-btn" onclick="hacerPantallaCompleta()">🔲 Jugar en Pantalla Completa</button>
     </div>
 
-    <!-- Script (JavaScript) para que funcione el botón de pantalla completa -->
+    
     <script>
         function hacerPantallaCompleta() {
             var iframe = document.getElementById("game-frame");
             if (iframe.requestFullscreen) {
                 iframe.requestFullscreen();
-            } else if (iframe.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+            } else if (iframe.webkitRequestFullscreen) { 
                 iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) { /* IE/Edge */
-                iframe.msRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {                 iframe.msRequestFullscreen();
             }
         }
     </script>
