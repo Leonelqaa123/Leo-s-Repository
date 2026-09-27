@@ -5,15 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Baúl - Mis Juegos Web</title>
     <style>
-     <body>
-        <nav>
-        <a href="index.html" class="nav-logo">🎮 Arcade Hub</a>
-        <div class="nav-links">
-            <a href="index.html" class="active">Juegos</a>
-            <a href="extras.html">Miscelánea</a>
-        </div>
-    </nav>
-    
+        /* --- ESTILOS GENERALES Y FONDO --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #0f0f1a;
@@ -22,7 +14,38 @@
             padding: 0;
         }
 
-        
+        /* --- BARRA DE NAVEGACIÓN (MENÚ) --- */
+        nav {
+            background-color: #16213e;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e94560;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00fff5;
+            text-decoration: none;
+            text-shadow: 0 0 5px #00fff580;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 1.05em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00fff5;
+        }
+
+        /* --- ENCABEZADO --- */
         header {
             background-color: #1a1a2e;
             padding: 40px 20px;
@@ -43,7 +66,7 @@
             margin-top: 10px;
         }
 
-        
+        /* --- CATÁLOGO DE TARJETAS --- */
         .catalog-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -53,32 +76,28 @@
             margin: 0 auto;
         }
 
-        
         .game-card {
             background-color: #16213e;
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none; /* Quita el subrayado de los links */
+            text-decoration: none;
             color: white;
             display: flex;
             flex-direction: column;
         }
 
-        
         .game-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 25px rgba(0, 255, 245, 0.2);
         }
 
-        
         .game-card img {
             width: 100%;
             height: 180px;
             object-fit: cover; 
         }
 
-        
         .game-info {
             padding: 15px;
             text-align: left;
@@ -96,7 +115,6 @@
             color: #b0b0c0;
         }
         
-        
         .platform-tag {
             display: inline-block;
             background-color: #00fff5;
@@ -107,24 +125,30 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
-
     </style>
 </head>
 <body>
 
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav>
+        <a href="index.html" class="nav-logo">🎮 Arcade Hub</a>
+        <div class="nav-links">
+            <a href="index.html" class="active">Juegos</a>
+            <a href="extras.html">Miscelánea</a>
+        </div>
+    </nav>
+
+    <!-- ENCABEZADO -->
     <header>
         <h1>🎮 Arcade Hub</h1>
         <p class="subtitle">Directorio de los mejores juegos web y emuladores</p>
     </header>
 
-    
+    <!-- CATÁLOGO DE JUEGOS -->
     <div class="catalog-container">
 
         <!-- TARJETA 1: Age of Empires 2 -->
-        <!-- En href="URL" pones el link de la página donde quieres que vayan -->
-        <!-- target="_blank" hace que se abra en una nueva pestaña -->
         <a href="https://dos.zone/age-of-empires2/" target="_blank" class="game-card">
-            <!-- URL de una imagen para la portada del juego -->
             <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Age_of_Empires_II_-_The_Age_of_Kings_Coverart.png" alt="Age of Empires 2">
             <div class="game-info">
                 <span class="platform-tag">DOS / Emulador</span>
@@ -133,7 +157,7 @@
             </div>
         </a>
 
-        <!-- TARJETA 2: Eaglercraft (Ejemplo) -->
+        <!-- TARJETA 2: Eaglercraft -->
         <a href="https://eaglercraft.com/es/play?version=1.8.8-wasm" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYADkDoS3iuG_cR7HlcQ6l-_CXiUG2oNR12vBkmEH5A&s=10" alt="Minecraft / Eaglercraft">
             <div class="game-info">
@@ -153,7 +177,7 @@
             </div>
         </a>      
         
-     <!-- TARJETA 4: Half-Life 2 -->
+        <!-- TARJETA 4: Half-Life 2 -->
         <a href="https://lucasigel.com/hl2" target="_blank" class="game-card">
             <img src="https://cdn.akamai.steamstatic.com/half-life.com/images/halflife2/halflife2_meta_image.jpg" alt="Half-Life 2">
             <div class="game-info">
@@ -163,7 +187,7 @@
             </div>
         </a>  
        
-     <!-- TARJETA 5: DOOM -->
+        <!-- TARJETA 5: DOOM -->
         <a href="https://dos.zone/doom-dec-1993/" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0-FaUDGNm2xXABlGfa9Hbgza02eu2t1BRJvghJ_y65kwGmGYUr1VeQ6Qe&s=10" alt="DOOM (Clásico)">
             <div class="game-info">
@@ -173,7 +197,7 @@
             </div>
         </a>
         
-      <!-- TARJETA 6: SM64 -->
+        <!-- TARJETA 6: SM64 -->
         <a href="https://notan127.github.io/SM64-PC-Port-WebGL/" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAKgbVj6Mcj8fDlgP2nWhlTS5D-sFZf_O1J_jYumLHq1n9xR0bpC5-qgg&s=10" alt="Super Mario 64">
             <div class="game-info">
@@ -183,7 +207,7 @@
             </div>
         </a>
 
-      <!-- TARJETA 7: CS 1.6 -->
+        <!-- TARJETA 7: CS 1.6 -->
         <a href="https://play-cs.com/es/" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdJYaY9hFeuTwZfSPMR6KjCijvIvUEdkI906rjn6ddIw&s" alt="Counter-Strike 1.6">
             <div class="game-info">
@@ -199,17 +223,17 @@
             <div class="game-info">
                 <span class="platform-tag">Web</span>
                 <h3>DKC2</h3>
-                <p>Diddy Kong empieza su aventura para rescatar a Donkey Kong, y se infiltra en el hogar de los enemigos, Crocodile Isle. En esta aventura lo acompaña su novia, Dixie Kong, una habilidosa chimpancé que debuta en este juego.</p>
+                <p>Diddy Kong empieza su aventura para rescatar a Donkey Kong, e infiltrarse en el hogar de los enemigos, Crocodile Isle.</p>
             </div>
         </a>
         
-       <!-- TARJETA 9: Undertale -->
+        <!-- TARJETA 9: Undertale -->
         <a href="https://undertale.win/" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBuC3FWpRNbwaW5kLNmrxCgqc7CiBuZ5w_3xmqa5gHda0Gk5iXORjRPRc&s=10" alt="Undertale">
             <div class="game-info">
                 <span class="platform-tag">Web Port</span>
                 <h3>Undertale</h3>
-                <p>Un videojuego de rol donde un niño humano cae por accidente a un mundo subterráneo habitado por monstruos y debe decidir si perdonarlos o destruirlos para regresar a la superficie.</p>
+                <p>Un videojuego de rol donde un niño humano cae por accidente a un mundo subterráneo habitado por monstruos.</p>
             </div>
         </a>
         
@@ -219,12 +243,12 @@
             <div class="game-info">
                 <span class="platform-tag">Web</span>
                 <h3>GoldenEye 007</h3>
-                <p>Controlas al agente secreto James Bond (007), quien debe detener al sindicato criminal JANUS y a su excompañero convertido en terrorista, Alec Trevelyan (006), para evitar que utilicen un arma satelital electromagnética llamada GoldenEye.</p>
+                <p>Controlas al agente secreto James Bond (007), quien debe detener al sindicato criminal JANUS.</p>
             </div>
         </a>
         
-        <!-- TARJETA X: Ejemplo de agregar más -->
-         <a href="#" target="_blank" class="game-card">
+        <!-- TARJETA Próximamente -->
+        <a href="#" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVryxwRSttAUkIYRzOaqrsWQk9iZRYRlu5S-iQr1SuoA&s=10" alt="Próximamente">
             <div class="game-info">
                 <span class="platform-tag">Pronto</span>
