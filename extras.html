@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Baúl - Miscelánea & Recursos</title>
+    <style>
+    
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f0f1a;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+    
+        nav {
+            background-color: #16213e;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+            border-bottom: 2px solid #e94560;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00fff5;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00fff5;
+        }
+
+      
+        header {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        h1 { 
+            margin: 0;
+            color: #00fff5; 
+            text-shadow: 0 0 10px #00fff580;
+            font-size: 2.5em;
+        }
+
+        p.subtitle {
+            color: #a0a0b0;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        /* Contenedor de Tarjetas */
+        .catalog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px 40px 40px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Tarjeta */
+        .resource-card {
+            background-color: #16213e;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #1f2d5a;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 255, 245, 0.2);
+            border-color: #00fff5;
+        }
+
+        .resource-info {
+            padding: 20px;
+        }
+
+        .resource-info h3 {
+            margin: 0 0 10px 0;
+            color: #e94560;
+            font-size: 1.4em;
+        }
+
+        .resource-info p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #b0b0c0;
+            line-height: 1.4;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #e94560;
+            color: #ffffff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">🎮 Mi Baúl</a>
+        <div class="nav-links">
+            <a href="index.html">Juegos</a>
+            <a href="extras.html" class="active">Miscelánea</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>📦 Extras & Recursos</h1>
+        <p class="subtitle">Música, herramientas y páginas útiles de la comunidad retro</p>
+    </header>
+  
+    <div class="catalog-container">
+
+        <!-- TARJETA: KHInsider -->
+        <a href="https://downloads.khinsider.com/" target="_blank" class="resource-card">
+            <div class="resource-info">
+                <span class="tag">Música / OST</span>
+                <h3>KHInsider</h3>
+                <p>La biblioteca de música de videojuegos más grande de internet. Descarga bandas sonoras en FLAC/MP3 de miles de consolas.</p>
+            </div>
+        </a>
+
+        <!-- TARJETA: Internet Archive -->
+        <a href="https://archive.org/details/softwarelibrary_msdos_games" target="_blank" class="resource-card">
+            <div class="resource-info">
+                <span class="tag">Archivo / Preservación</span>
+                <h3>Internet Archive DOS</h3>
+                <p>Colección masiva de software y juegos históricos preservados para su consulta y ejecución web.</p>
+            </div>
+        </a>
+
+        <!-- TARJETA: Spriters Resource -->
+        <a href="https://www.spriters-resource.com/" target="_blank" class="resource-card">
+            <div class="resource-info">
+                <span class="tag">Recursos / Sprites</span>
+                <h3>The Spriters Resource</h3>
+                <p>Sprites, mapas y texturas rippeadas directamente de miles de juegos retro en 2D.</p>
+            </div>
+        </a>
+
+    </div>
+
+</body>
+</html>
