@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Baúl - Mis Juegos Web</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+
     <style>
-        /* --- ESTILOS GENERALES Y FONDO --- */
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #0f0f1a;
@@ -14,7 +17,7 @@
             padding: 0;
         }
 
-        /* --- BARRA DE NAVEGACIÓN (MENÚ) --- */
+        
         nav {
             background-color: #16213e;
             padding: 15px 40px;
@@ -66,12 +69,41 @@
             margin-top: 10px;
         }
 
-        /* --- CATÁLOGO DE TARJETAS --- */
+       
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 30px 20px 10px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filter-btn {
+            background-color: #16213e;
+            color: #ffffff;
+            border: 1px solid #00fff5;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #00fff5;
+            color: #0f0f1a;
+            box-shadow: 0 0 10px #00fff580;
+        }
+
+       
         .catalog-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
-            padding: 40px;
+            padding: 30px 40px 40px 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -129,7 +161,7 @@
 </head>
 <body>
 
-    <!-- MENÚ DE NAVEGACIÓN -->
+    
     <nav>
         <a href="index.html" class="nav-logo">🎮 Arcade Hub</a>
         <div class="nav-links">
@@ -138,13 +170,21 @@
         </div>
     </nav>
 
-    <!-- ENCABEZADO -->
+    
     <header>
-        <h1>🎮 Arcade Hub</h1>
+        <h1>🎮 Mi Baúl</h1>
         <p class="subtitle">Directorio de los mejores juegos web y emuladores</p>
     </header>
 
-    <!-- CATÁLOGO DE JUEGOS -->
+    
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filtrarJuegos('todos', this)">🔥 Todos</button>
+        <button class="filter-btn" onclick="filtrarJuegos('dos', this)">💾 DOS / Emulador</button>
+        <button class="filter-btn" onclick="filtrarJuegos('port', this)">🕹️ Web Ports</button>
+        <button class="filter-btn" onclick="filtrarJuegos('web', this)">🌐 Web / Canvas</button>
+    </div>
+
+    
     <div class="catalog-container">
 
         <!-- TARJETA 1: Age of Empires 2 -->
@@ -257,7 +297,7 @@
             </div>
         </a>
 
-       <!-- TARJETA 12: Granny -->
+        <!-- TARJETA 12: Granny -->
         <a href="https://grannyonline.io/" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST-OFaIuf0v2NJGoMLX5upQ9f3IM60yserrUaSA62L8A&s" alt="Granny">
             <div class="game-info">
@@ -267,7 +307,7 @@
             </div>
         </a>
 
-       <!-- TARJETA 13: Fnaf -->
+        <!-- TARJETA 13: Fnaf -->
         <a href="https://fnafgame.io/" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQDBjFp50_PzT-P7ygvTUUkTjJoff1tr63ooze-Morl0kSj-7GNNFtizczdHfAKihMYlp9QeeBXOmnzZ_2IkqdSE5lhTo-N6fXwQdWFAQ&s=10" alt="Fnaf">
             <div class="game-info">
@@ -277,7 +317,7 @@
             </div>
         </a>
 
-       <!-- TARJETA 14: Geometry Dash-->
+        <!-- TARJETA 14: Geometry Dash-->
         <a href="https://geometrydash-pc.com/" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHqaQT6t7tGhfDVuD67US2evQi4_xAjt0hTaqTOwFb96ncjtov8kKJCpc&s=10" alt="Geometry Dash">
             <div class="game-info">
@@ -287,7 +327,7 @@
             </div>
         </a>
 
-    <!-- TARJETA 15: TNT -->
+        <!-- TARJETA 15: TNT -->
         <a href="https://cjdgrevival.com/" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK0KJEZ0LPGh2E5edhYrJcWTvskkYam_6sAOgYJiwM1Q&s=10" alt="Taiko no Tatsujin">
             <div class="game-info">
@@ -297,7 +337,7 @@
             </div>
         </a>
 
-<!-- TARJETA 16: DDLC -->
+        <!-- TARJETA 16: DDLC -->
         <a href="https://selenite.cc/resources/semag/ddlcplus/index.html" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRveAs4oYOWobkvhqBiNq8Ly4F8dpLmKaP8cDjDytYnyw&s=10" alt="DDLC">
             <div class="game-info">
@@ -307,7 +347,7 @@
             </div>
         </a>
 
-<!-- TARJETA 17: AC -->
+        <!-- TARJETA 17: AC -->
         <a href="https://rgc.zone/ports/ac-webport-main/index.html" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwNwBFPSNvAJccIYBDTxAoHlnpDovcOlj4iBG_SkefKRSeMLgErSGG8Fg5&s=10" alt="Animal Crossing">
             <div class="game-info">
@@ -317,7 +357,7 @@
             </div>
         </a>
 
-<!-- TARJETA 18: Quake 2 -->
+        <!-- TARJETA 18: Quake 2 -->
         <a href="https://rgc.zone/ports/Q2web/index.html" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrorBUVU0rbxJE5zcMjPBurlTfK9UboQ00HNsARfIF3k6NLTOM7CVbMSA&s=10" alt="Quake 2">
             <div class="game-info">
@@ -327,7 +367,7 @@
             </div>
         </a>
 
-<!-- TARJETA 19: SMB -->
+        <!-- TARJETA 19: SMB -->
         <a href="https://monkeyball-online.pages.dev/" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjA1W_xRufaZwMyVODTp2ns7mss3cjq8Hgc9_Xl_4MxnTs3fQSDRtZjSA&s=10" alt="Super Monkey Ball">
             <div class="game-info">
@@ -337,13 +377,13 @@
             </div>
         </a>
         
-<!-- TARJETA 20: Tekken 3 -->
+        <!-- TARJETA 20: Tekken 3 -->
         <a href="https://www.retrogames.cc/psx-games/tekken-3.html" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSNQ8cjK83qCHQZod3nk6srk-XtzthLWnm3XfC-f-3AUoKKs2rSiV03j0&s=10" alt="Tekken 3">
             <div class="game-info">
                 <span class="platform-tag">Emulador</span>
                 <h3>Tekken 3</h3>
-                <p>Tekken 3 es un legendario videojuego de lucha en el que Heihachi Mishima organiza un nuevo torneo de artes marciales para atraer y capturar a Ogre, un antiguo dios de la lucha que ha asesinado a la madre del joven Jin Kazama.</p>
+                <p>Tekken 3 es un legendario videojuego de lucha en el que Heihachi Mishima organiza un nuevo torneo de artes marciales para atraer y capturar a Ogre.</p>
             </div>
         </a>
         
@@ -359,5 +399,37 @@
 
     </div>
 
+    
+    <script>
+        function filtrarJuegos(categoria, boton) {
+            // Cambiar la clase activa del botón seleccionado
+            const botones = document.querySelectorAll('.filter-btn');
+            botones.forEach(btn => btn.classList.remove('active'));
+            boton.classList.add('active');
+
+            // Filtrar las tarjetas de juegos
+            const tarjetas = document.querySelectorAll('.game-card');
+            tarjetas.forEach(tarjeta => {
+                const etiqueta = tarjeta.querySelector('.platform-tag');
+                if (!etiqueta) return;
+
+                const textoEtiqueta = etiqueta.textContent.toLowerCase();
+
+                if (categoria === 'todos') {
+                    tarjeta.style.display = 'flex';
+                } else if (categoria === 'dos' && (textoEtiqueta.includes('dos') || textoEtiqueta.includes('emulador'))) {
+                    tarjeta.style.display = 'flex';
+                } else if (categoria === 'port' && textoEtiqueta.includes('port')) {
+                    tarjeta.style.display = 'flex';
+                } else if (categoria === 'web' && (textoEtiqueta.includes('canvas') || (textoEtiqueta.includes('web') && !textoEtiqueta.includes('port')))) {
+                    tarjeta.style.display = 'flex';
+                } else {
+                    tarjeta.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
 </body>
-</html>
+    </html>
+    
