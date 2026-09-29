@@ -386,6 +386,37 @@
             </div>
         </a>
         
+       <!-- TARJETA 21: SF3: TS -->
+        <a href="https://www.retrogames.cc/arcade-games/street-fighter-iii-3rd-strike:-fight-for-the-future-usa-990608.html" target="_blank" class="game-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR__BSGDEMMzwatU1qDSXo1jAZmg-JztWs5rGPTfZijfl-4fEYy88lSS8om&s=10" alt="SF3: TS">
+            <div class="game-info">
+                <span class="platform-tag">Emulador</span>
+                <h3>Street Fighter 3: Third Strike</h3>
+                <p>Una secta milenaria liderada por Gill y su hermano Urien busca purificar el mundo y crear una utopía bajo su control absoluto.</p>
+            </div>
+        </a>
+
+       <!-- TARJETA 22: KOF 98 -->
+        <a href="https://www.retrogames.cc/arcade-games/the-king-of-fighters-98-the-slugfest-king-of-fighters-98-dream-match-never-ends-ngm-2420.html" target="_blank" class="game-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSQqslL2emDpsknSK1VGDkYW-LceWITGf7sxAhHg5fdQ&s=10" alt="KOF 98">
+            <div class="game-info">
+                <span class="platform-tag">Emulador</span>
+                <h3>The King of Fighters '98</h3>
+                <p>KOF '98 es el quinto juego de la saga y está considerado por muchos como el mejor y más equilibrado juego de lucha clásica de la historia.
+</p>
+            </div>
+        </a>
+
+       <!-- TARJETA 23: Postal 1 -->
+        <a href="https://playpostal.com/" target="_blank" class="game-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv2tbnOn6im5-A6tYMCVPihXvKRNQs5y12WHKgp99cPQ&s=10" alt="Postal 1">
+            <div class="game-info">
+                <span class="platform-tag">Web Port</span>
+                <h3>POSTAL 1997</h3>
+                <p>Postal Dude, al creer que los habitantes de su pueblo (Paradise) están infectados o locos, sufre un brote psicótico y decide emprender una cruzada violenta para "limpiar" el área, interpretando sus actos en un diario como una defensa propia o retribución divina.</p>
+            </div>
+        </a> 
+        
         <!-- TARJETA Próximamente -->
         <a href="#" target="_blank" class="game-card">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVryxwRSttAUkIYRzOaqrsWQk9iZRYRlu5S-iQr1SuoA&s=10" alt="Próximamente">
@@ -401,12 +432,11 @@
     
     <script>
         function filtrarJuegos(categoria, boton) {
-            // Cambiar la clase activa del botón seleccionado
+            
             const botones = document.querySelectorAll('.filter-btn');
             botones.forEach(btn => btn.classList.remove('active'));
             boton.classList.add('active');
 
-            // Filtrar las tarjetas de juegos
             const tarjetas = document.querySelectorAll('.game-card');
             tarjetas.forEach(tarjeta => {
                 const etiqueta = tarjeta.querySelector('.platform-tag');
