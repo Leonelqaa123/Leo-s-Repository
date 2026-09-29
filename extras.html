@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Baúl - Miscelánea & Recursos</title>
+    <title>El baúl de Leo- Miscelánea & Recursos</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+
     <style>
-    
+  
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #0f0f1a;
@@ -14,13 +17,12 @@
             padding: 0;
         }
 
-    
         nav {
             background-color: #16213e;
             padding: 15px 40px;
             display: flex;
             justify-content: space-between;
-            align-content: center;
+            align-items: center;
             border-bottom: 2px solid #e94560;
         }
 
@@ -29,6 +31,7 @@
             font-weight: bold;
             color: #00fff5;
             text-decoration: none;
+            text-shadow: 0 0 5px #00fff580;
         }
 
         .nav-links a {
@@ -36,6 +39,7 @@
             text-decoration: none;
             margin-left: 20px;
             font-weight: bold;
+            font-size: 1.05em;
             transition: color 0.3s;
         }
 
@@ -43,17 +47,19 @@
             color: #00fff5;
         }
 
-      
+        /* --- ENCABEZADO --- */
         header {
-            padding: 30px 20px;
+            background-color: #1a1a2e;
+            padding: 40px 20px;
             text-align: center;
+            border-bottom: 2px solid #e94560;
         }
 
         h1 { 
             margin: 0;
             color: #00fff5; 
             text-shadow: 0 0 10px #00fff580;
-            font-size: 2.5em;
+            font-size: 2.8em;
         }
 
         p.subtitle {
@@ -62,22 +68,48 @@
             margin-top: 10px;
         }
 
-        
-        .catalog-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 20px 40px 40px 40px;
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 30px 20px 10px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        
+        .filter-btn {
+            background-color: #16213e;
+            color: #ffffff;
+            border: 1px solid #00fff5;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #00fff5;
+            color: #0f0f1a;
+            box-shadow: 0 0 10px #00fff580;
+        }
+
+        .catalog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 30px 40px 40px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .resource-card {
             background-color: #16213e;
             border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             text-decoration: none;
             color: white;
             display: flex;
@@ -123,7 +155,7 @@
 <body>
 
     <nav>
-        <a href="index.html" class="nav-logo">🎮 Mi Baúl</a>
+        <a href="index.html" class="nav-logo">🎮 El baúl de Leo</a>
         <div class="nav-links">
             <a href="index.html">Juegos</a>
             <a href="extras.html" class="active">Miscelánea</a>
@@ -132,9 +164,17 @@
 
     <header>
         <h1>📦 Extras & Recursos</h1>
-        <p class="subtitle">Música, herramientas y páginas útiles de la comunidad retro</p>
+        <p class="subtitle">Música, herramientas, arte y utilidades de la comunidad retro</p>
     </header>
-  
+
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filtrarRecursos('todos', this)">🔥 Todos</button>
+        <button class="filter-btn" onclick="filtrarRecursos('musica', this)">🎵 Música / Audio</button>
+        <button class="filter-btn" onclick="filtrarRecursos('recursos', this)">🎨 Recursos / Arte</button>
+        <button class="filter-btn" onclick="filtrarRecursos('archivo', this)">💾 Archivo / Preservación</button>
+        <button class="filter-btn" onclick="filtrarRecursos('guias', this)">🛠️ Utilidades / Juegos</button>
+    </div>
+
     <div class="catalog-container">
 
         <!-- TARJETA: KHInsider -->
@@ -155,6 +195,15 @@
             </div>
         </a>
 
+        <!-- TARJETA: MyAbandonware -->
+        <a href="https://www.myabandonware.com/" target="_blank" class="resource-card">
+            <div class="resource-info">
+                <span class="tag">Archivo / Preservación</span>
+                <h3>MyAbandonware</h3>
+                <p>Más de 25,000 juegos descontinuados para PC, Mac y consolas antiguas listos para descargar o consultar.</p>
+            </div>
+        </a>
+
         <!-- TARJETA: Spriters Resource -->
         <a href="https://www.spriters-resource.com/" target="_blank" class="resource-card">
             <div class="resource-info">
@@ -164,43 +213,93 @@
             </div>
         </a>
 
-       <!-- TARJETA: Optijuegos -->
+        <!-- TARJETA: Sounds Resource -->
+        <a href="https://www.sounds-resource.com/" target="_blank" class="resource-card">
+            <div class="resource-info">
+                <span class="tag">Música / Audio</span>
+                <h3>The Sounds Resource</h3>
+                <p>Efectos de sonido, voces y música extraídos directamente de miles de videojuegos clásicos.</p>
+            </div>
+        </a>
+
+        <!-- TARJETA: Steam GridDB -->
+        <a href="https://www.steamgriddb.com/" target="_blank" class="resource-card">
+            <div class="resource-info">
+                <span class="tag">Recursos / Imágenes</span>
+                <h3>Steam GridDB</h3>
+                <p>Recursos, portadas en alta resolución, banners y logotipos transparentes para videojuegos.</p>
+            </div>
+        </a>
+
+        <!-- TARJETA: Optijuegos -->
         <a href="https://optijuegos.net/" target="_blank" class="resource-card">
             <div class="resource-info">
-                <span class="tag">Optimización / Juegos</span>
+                <span class="tag">Guía / Optimización</span>
                 <h3>Optijuegos</h3>
                 <p>Colección de juegos optimizados para que corran en computadoras de bajos recursos.</p>
             </div>
         </a>
         
-    <!-- TARJETA: GrabCraft -->
+        <!-- TARJETA: GrabCraft -->
         <a href="https://www.grabcraft.com/" target="_blank" class="resource-card">
             <div class="resource-info">
                 <span class="tag">Guía / Asistencia</span>
                 <h3>GrabCraft</h3>
-                <p>Planos para construcciones para tus mundos en Minecraft (O EaglerCraft).</p>
+                <p>Planos paso a paso de construcciones impresionantes para tus mundos en Minecraft (o Eaglercraft).</p>
             </div>
         </a>
 
-<!-- TARJETA: Steam GridDB -->
-        <a href="https://www.steamgriddb.com/" target="_blank" class="resource-card">
-            <div class="resource-info">
-                <span class="tag">Recursos / imágenes</span>
-                <h3>Steam GridDB</h3>
-                <p>Recursos para portadas de videojuegos.</p>
-            </div>
-        </a>
-
-<!-- TARJETA: LostGamer.io -->
+        <!-- TARJETA: LostGamer.io -->
         <a href="https://lostgamer.io/" target="_blank" class="resource-card">
             <div class="resource-info">
                 <span class="tag">Juego / Adivinanzas</span>
                 <h3>LostGamer.io</h3>
-                <p>Un juego como GeoGuesser pero con mapas de videojuegos.</p>
+                <p>Un juego estilo GeoGuessr ambientado dentro de mapas 3D de juegos como GTA, Zelda, Skyrim y Fortnite.</p>
+            </div>
+        </a>
+
+        <!-- TARJETA: HowLongToBeat -->
+        <a href="https://howlongtobeat.com/" target="_blank" class="resource-card">
+            <div class="resource-info">
+                <span class="tag">Guía / Asistencia</span>
+                <h3>HowLongToBeat</h3>
+                <p>Descubre cuánto tiempo se tarda en completar la historia principal o el 100% de cualquier juego existente.</p>
             </div>
         </a>
     
     </div>
+
+    <script>
+        function filtrarRecursos(categoria, boton) {
+            
+            const botones = document.querySelectorAll('.filter-btn');
+            botones.forEach(btn => btn.classList.remove('active'));
+            boton.classList.add('active');
+
+        
+            const tarjetas = document.querySelectorAll('.resource-card');
+            tarjetas.forEach(tarjeta => {
+                const etiqueta = tarjeta.querySelector('.tag');
+                if (!etiqueta) return;
+
+                const textoEtiqueta = etiqueta.textContent.toLowerCase();
+
+                if (categoria === 'todos') {
+                    tarjeta.style.display = 'flex';
+                } else if (categoria === 'musica' && (textoEtiqueta.includes('música') || textoEtiqueta.includes('audio') || textoEtiqueta.includes('ost'))) {
+                    tarjeta.style.display = 'flex';
+                } else if (categoria === 'recursos' && (textoEtiqueta.includes('recursos') || textoEtiqueta.includes('sprites') || textoEtiqueta.includes('imágenes'))) {
+                    tarjeta.style.display = 'flex';
+                } else if (categoria === 'archivo' && (textoEtiqueta.includes('archivo') || textoEtiqueta.includes('preservación'))) {
+                    tarjeta.style.display = 'flex';
+                } else if (categoria === 'guias' && (textoEtiqueta.includes('guía') || textoEtiqueta.includes('juego') || textoEtiqueta.includes('asistencia') || textoEtiqueta.includes('optimización'))) {
+                    tarjeta.style.display = 'flex';
+                } else {
+                    tarjeta.style.display = 'none';
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
