@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El baúl de Leo - Feedback & Soporte</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+
+    <style>
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f0f1a;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #16213e;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e94560;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00fff5;
+            text-decoration: none;
+            text-shadow: 0 0 5px #00fff580;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 1.05em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #00fff5;
+        }
+
+        header {
+            background-color: #1a1a2e;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 2px solid #e94560;
+        }
+
+        h1 { 
+            margin: 0;
+            color: #00fff5; 
+            text-shadow: 0 0 10px #00fff580;
+            font-size: 2.8em;
+        }
+
+        p.subtitle {
+            color: #a0a0b0;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .feedback-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feedback-card {
+            background-color: #16213e;
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid #1f2d5a;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feedback-card:hover {
+            transform: translateY(-8px);
+            border-color: #00fff5;
+            box-shadow: 0 10px 20px rgba(0, 255, 245, 0.15);
+        }
+
+        .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feedback-card h3 {
+            margin: 0 0 10px 0;
+            color: #e94560;
+            font-size: 1.5em;
+        }
+
+        .feedback-card p {
+            color: #b0b0c0;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .btn-github {
+            display: inline-block;
+            background-color: #00fff5;
+            color: #0f0f1a;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-github:hover {
+            background-color: #ffffff;
+            box-shadow: 0 0 15px #00fff580;
+        }
+
+        .info-box {
+            max-width: 940px;
+            margin: 0 auto 50px auto;
+            background-color: #1a1a2e;
+            border-left: 4px solid #00fff5;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            color: #a0a0b0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .info-box strong {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">🎮 El baúl de Leo</a>
+        <div class="nav-links">
+            <a href="index.html">Juegos</a>
+            <a href="extras.html">Miscelánea</a>
+            <a href="feedback.html" class="active">Feedback</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>💬 Feedback & Soporte</h1>
+        <p class="subtitle">¿Un juego no carga o te gustaría ver uno nuevo en el catálogo? ¡Avisanos!</p>
+    </header>
+
+    <div class="feedback-container">
+
+        <div class="feedback-card">
+            <div>
+                <div class="icon">🎮</div>
+                <h3>Pedir un Juego</h3>
+                <p>¿Hay un clásico web o port que te encantaría tener en la página? Pídelo y buscaremos la mejor versión para agregarlo.</p>
+            </div>
+            <a href="https://github.com/Leonelqaa123/Leo-s-Repository/issues/new?title=Solicitud:%20[Nombre%20del%20Juego]&body=Escribe%20aquí%20el%20nombre%20del%20juego%20o%20el%20enlace%20si%20ya%20lo%20tienes." target="_blank" class="btn-github">
+                ✨ Pedir Juego
+            </a>
+        </div>
+
+        <div class="feedback-card">
+            <div>
+                <div class="icon">🚨</div>
+                <h3>Reportar Enlace Caído</h3>
+                <p>¿Hiciste clic en un juego y la página no carga o tira error? Avísanos para actualizar el enlace inmediatamente.</p>
+            </div>
+            <a href="https://github.com/Leonelqaa123/Leo-s-Repository/issues/new?title=Reporte:%20[Juego%20con%20link%20ca%C3%ADdo]&body=Escribe%20aqu%C3%AD%20cu%C3%A1l%20juego%20no%20funciona." target="_blank" class="btn-github">
+                ⚠️ Reportar Error
+            </a>
+        </div>
+
+        <div class="feedback-card">
+            <div>
+                <div class="icon">💡</div>
+                <h3>Sugerencias y Mejoras</h3>
+                <p>¿Tienes alguna idea para mejorar el diseño, las categorías o nuevas funciones de la página? ¡Toda sugerencia es bienvenida!</p>
+            </div>
+            <a href="https://github.com/Leonelqaa123/Leo-s-Repository/issues/new?title=Sugerencia:%20[Tu%20Idea]" target="_blank" class="btn-github">
+                💡 Enviar Idea
+            </a>
+        </div>
+
+    </div>
+
+    <div class="info-box">
+        📌 <strong>¿Cómo funciona?</strong> Al hacer clic en cualquiera de los botones serás redirigido a la sección de <em>Issues</em> de GitHub de nuestro proyecto. Necesitarás tener una cuenta gratuita de GitHub para publicar tu mensaje. ¡Nos llega la notificación al instante y lo revisamos!
+    </div>
+
+</body>
+</html>
