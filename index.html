@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
 
     <style>
-        
+     
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #0f0f1a;
@@ -17,7 +17,6 @@
             padding: 0;
         }
 
-        
         nav {
             background-color: #16213e;
             padding: 15px 40px;
@@ -68,13 +67,45 @@
             margin-top: 10px;
         }
 
-       
+        .controls-container {
+            max-width: 1000px;
+            margin: 20px auto 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid #1f2d5a;
+            background-color: #16213e;
+            color: #ffffff;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .search-box input:focus {
+            border-color: #00fff5;
+            box-shadow: 0 0 10px rgba(0, 255, 245, 0.4);
+        }
+
         .filter-container {
             display: flex;
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
-            padding: 30px 20px 10px 20px;
+            padding: 10px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -97,7 +128,6 @@
             box-shadow: 0 0 10px #00fff580;
         }
 
-       
         .catalog-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -112,15 +142,22 @@
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
-            color: white;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .game-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 25px rgba(0, 255, 245, 0.2);
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .game-card img {
@@ -156,443 +193,472 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+
+        .fav-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            background: rgba(15, 15, 26, 0.75);
+            border: 1px solid #1f2d5a;
+            color: #888888;
+            font-size: 1.3em;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fav-btn:hover {
+            transform: scale(1.15);
+            color: #ffd700;
+        }
+
+        .fav-btn.is-favorite {
+            color: #ffd700;
+            border-color: #ffd700;
+            text-shadow: 0 0 8px #ffd700;
+            background: rgba(15, 15, 26, 0.9);
+        }
     </style>
 </head>
 <body>
 
-    
     <nav>
         <a href="index.html" class="nav-logo">🎮 El baúl de Leo</a>
         <div class="nav-links">
-            <a href="index.html">Juegos</a>
+            <a href="index.html" class="active">Juegos</a>
             <a href="extras.html">Miscelánea</a>
             <a href="feedback.html">Feedback</a>
-        
         </div>
     </nav>
 
-    
     <header>
         <h1>🎮 Mi Baúl</h1>
         <p class="subtitle">Directorio de los mejores juegos web y emuladores</p>
     </header>
 
-    
-    <div class="filter-container">
-        <button class="filter-btn active" onclick="filtrarJuegos('todos', this)">🔥 Todos</button>
-        <button class="filter-btn" onclick="filtrarJuegos('dos', this)">💾 DOS / Emulador</button>
-        <button class="filter-btn" onclick="filtrarJuegos('port', this)">🕹️ Web Ports</button>
-        <button class="filter-btn" onclick="filtrarJuegos('web', this)">🌐 Web / Canvas</button>
+    <div class="controls-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" oninput="filtrarJuegos()" placeholder="🔍 Buscar un juego por nombre...">
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="setCategoria('todos', this)">🔥 Todos</button>
+            <button class="filter-btn" onclick="setCategoria('favoritos', this)">⭐ Mis Favoritos</button>
+            <button class="filter-btn" onclick="setCategoria('dos', this)">💾 DOS / Emulador</button>
+            <button class="filter-btn" onclick="setCategoria('port', this)">🕹️ Web Ports</button>
+            <button class="filter-btn" onclick="setCategoria('web', this)">🌐 Web / Canvas</button>
+        </div>
     </div>
 
-    
     <div class="catalog-container">
 
         <!-- TARJETA 1: Age of Empires 2 -->
-        <a href="https://dos.zone/age-of-empires2/" target="_blank" class="game-card">
-            <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Age_of_Empires_II_-_The_Age_of_Kings_Coverart.png" alt="Age of Empires 2">
-            <div class="game-info">
-                <span class="platform-tag">DOS / Emulador</span>
-                <h3>Age of Empires 2</h3>
-                <p>El clásico juego de estrategia en tiempo real. Construye tu imperio y derrota a tus enemigos.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="aoe2" data-categoria="dos">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'aoe2')" title="Favorito">★</button>
+            <a href="https://dos.zone/age-of-empires2/" target="_blank" class="card-link">
+                <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Age_of_Empires_II_-_The_Age_of_Kings_Coverart.png" alt="Age of Empires 2">
+                <div class="game-info">
+                    <span class="platform-tag">DOS / Emulador</span>
+                    <h3>Age of Empires 2</h3>
+                    <p>El clásico juego de estrategia en tiempo real. Construye tu imperio y derrota a tus enemigos.</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 2: Eaglercraft -->
-        <a href="https://eaglercraft.com/es/play?version=1.8.8-wasm" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYADkDoS3iuG_cR7HlcQ6l-_CXiUG2oNR12vBkmEH5A&s=10" alt="Minecraft / Eaglercraft">
-            <div class="game-info">
-                <span class="platform-tag">Web Canvas</span>
-                <h3>Eaglercraft</h3>
-                <p>Juega al clásico Minecraft directamente en tu navegador sin instalar nada.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="eaglercraft" data-categoria="web">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'eaglercraft')" title="Favorito">★</button>
+            <a href="https://eaglercraft.com/es/play?version=1.8.8-wasm" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAYADkDoS3iuG_cR7HlcQ6l-_CXiUG2oNR12vBkmEH5A&s=10" alt="Minecraft / Eaglercraft">
+                <div class="game-info">
+                    <span class="platform-tag">Web Canvas</span>
+                    <h3>Eaglercraft</h3>
+                    <p>Juega al clásico Minecraft directamente en tu navegador sin instalar nada.</p>
+                </div>
+            </a>
+        </div>
 
-         <!-- TARJETA 3: Half-Life 1 -->
-        <a href="https://pixelsuft.github.io/hl/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdOeyQfSm_pzi8kVwAOwWbTOO_8fAf1evA3j3N99IlSnM8Cz_1X5MKKvlE&s=10" alt="Half-Life 1">
-            <div class="game-info">
-                <span class="platform-tag">Web</span>
-                <h3>Half-Life 1</h3>
-                <p>El iniciador de la era dorada de los shooters del 98 en tu navegador.</p>
-            </div>
-        </a>      
+        <!-- TARJETA 3: Half-Life 1 -->
+        <div class="game-card" data-id="hl1" data-categoria="web">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'hl1')" title="Favorito">★</button>
+            <a href="https://pixelsuft.github.io/hl/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdOeyQfSm_pzi8kVwAOwWbTOO_8fAf1evA3j3N99IlSnM8Cz_1X5MKKvlE&s=10" alt="Half-Life 1">
+                <div class="game-info">
+                    <span class="platform-tag">Web</span>
+                    <h3>Half-Life 1</h3>
+                    <p>El iniciador de la era dorada de los shooters del 98 en tu navegador.</p>
+                </div>
+            </a>
+        </div>      
         
         <!-- TARJETA 4: Half-Life 2 -->
-        <a href="https://lucasigel.com/hl2" target="_blank" class="game-card">
-            <img src="https://cdn.akamai.steamstatic.com/half-life.com/images/halflife2/halflife2_meta_image.jpg" alt="Half-Life 2">
-            <div class="game-info">
-                <span class="platform-tag">Web</span>
-                <h3>Half-Life 2</h3>
-                <p>El revolucionario shooter del 2004 en tu navegador.</p>
-            </div>
-        </a>  
+        <div class="game-card" data-id="hl2" data-categoria="web">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'hl2')" title="Favorito">★</button>
+            <a href="https://lucasigel.com/hl2" target="_blank" class="card-link">
+                <img src="https://cdn.akamai.steamstatic.com/half-life.com/images/halflife2/halflife2_meta_image.jpg" alt="Half-Life 2">
+                <div class="game-info">
+                    <span class="platform-tag">Web</span>
+                    <h3>Half-Life 2</h3>
+                    <p>El revolucionario shooter del 2004 en tu navegador.</p>
+                </div>
+            </a>
+        </div>  
        
         <!-- TARJETA 5: DOOM -->
-        <a href="https://dos.zone/doom-dec-1993/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0-FaUDGNm2xXABlGfa9Hbgza02eu2t1BRJvghJ_y65kwGmGYUr1VeQ6Qe&s=10" alt="DOOM (Clásico)">
-            <div class="game-info">
-                <span class="platform-tag">DOS / EMULADOR</span>
-                <h3>DOOM</h3>
-                <p>Otro gran revolucionario de los shooters que corre en cualquier cosa (hasta en mi página).</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="doom" data-categoria="dos">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'doom')" title="Favorito">★</button>
+            <a href="https://dos.zone/doom-dec-1993/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0-FaUDGNm2xXABlGfa9Hbgza02eu2t1BRJvghJ_y65kwGmGYUr1VeQ6Qe&s=10" alt="DOOM (Clásico)">
+                <div class="game-info">
+                    <span class="platform-tag">DOS / EMULADOR</span>
+                    <h3>DOOM</h3>
+                    <p>Otro gran revolucionario de los shooters que corre en cualquier cosa (hasta en mi página).</p>
+                </div>
+            </a>
+        </div>
         
         <!-- TARJETA 6: SM64 -->
-        <a href="https://notan127.github.io/SM64-PC-Port-WebGL/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAKgbVj6Mcj8fDlgP2nWhlTS5D-sFZf_O1J_jYumLHq1n9xR0bpC5-qgg&s=10" alt="Super Mario 64">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Super Mario 64</h3>
-                <p>Bowser ha secuestrado a Peach otra vez y Mario tiene que rescatarla.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="sm64" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'sm64')" title="Favorito">★</button>
+            <a href="https://notan127.github.io/SM64-PC-Port-WebGL/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAKgbVj6Mcj8fDlgP2nWhlTS5D-sFZf_O1J_jYumLHq1n9xR0bpC5-qgg&s=10" alt="Super Mario 64">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>Super Mario 64</h3>
+                    <p>Bowser ha secuestrado a Peach otra vez y Mario tiene que rescatarla.</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 7: CS 1.6 -->
-        <a href="https://play-cs.com/es/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdJYaY9hFeuTwZfSPMR6KjCijvIvUEdkI906rjn6ddIw&s" alt="Counter-Strike 1.6">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Counter-Strike 1.6</h3>
-                <p>Un juego multijugador para computadora donde se enfrentan dos equipos: los terroristas y los antiterroristas.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="cs16" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'cs16')" title="Favorito">★</button>
+            <a href="https://play-cs.com/es/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdJYaY9hFeuTwZfSPMR6KjCijvIvUEdkI906rjn6ddIw&s" alt="Counter-Strike 1.6">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>Counter-Strike 1.6</h3>
+                    <p>Un juego multijugador para computadora donde se enfrentan dos equipos: los terroristas y los antiterroristas.</p>
+                </div>
+            </a>
+        </div>
         
         <!-- TARJETA 8: DKC2 -->
-        <a href="https://www.retrogames.cc/snes-games/donkey-kong-country-2-diddy-s-kong-quest-usa-en-fr.html" target="_blank" class="game-card">
-            <img src="https://www.levelup.com/resizer/v2/WHVMB5MUXNGATFCMDRLXHWJWTQ.jpg?auth=6b5015cc2239fe8b36197600e94afac73df4357929827ca80a3a1315d201e5fe&width=900&quality=70&smart=true" alt="Donkey Kong Country 2">
-            <div class="game-info">
-                <span class="platform-tag">Emulador</span>
-                <h3>Donkey Kong Country 2</h3>
-                <p>Diddy Kong empieza su aventura para rescatar a Donkey Kong, e infiltrarse en el hogar de los enemigos, Crocodile Isle.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="dkc2" data-categoria="dos">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'dkc2')" title="Favorito">★</button>
+            <a href="https://www.retrogames.cc/snes-games/donkey-kong-country-2-diddy-s-kong-quest-usa-en-fr.html" target="_blank" class="card-link">
+                <img src="https://www.levelup.com/resizer/v2/WHVMB5MUXNGATFCMDRLXHWJWTQ.jpg?auth=6b5015cc2239fe8b36197600e94afac73df4357929827ca80a3a1315d201e5fe&width=900&quality=70&smart=true" alt="Donkey Kong Country 2">
+                <div class="game-info">
+                    <span class="platform-tag">Emulador</span>
+                    <h3>Donkey Kong Country 2</h3>
+                    <p>Diddy Kong empieza su aventura para rescatar a Donkey Kong, e infiltrarse en Crocodile Isle.</p>
+                </div>
+            </a>
+        </div>
         
         <!-- TARJETA 9: Undertale -->
-        <a href="https://undertale.win/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBuC3FWpRNbwaW5kLNmrxCgqc7CiBuZ5w_3xmqa5gHda0Gk5iXORjRPRc&s=10" alt="Undertale">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Undertale</h3>
-                <p>Un videojuego de rol donde un niño humano cae por accidente a un mundo subterráneo habitado por monstruos.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="undertale" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'undertale')" title="Favorito">★</button>
+            <a href="https://undertale.win/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBuC3FWpRNbwaW5kLNmrxCgqc7CiBuZ5w_3xmqa5gHda0Gk5iXORjRPRc&s=10" alt="Undertale">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>Undertale</h3>
+                    <p>Un videojuego de rol donde un niño humano cae por accidente a un mundo subterráneo habitado por monstruos.</p>
+                </div>
+            </a>
+        </div>
         
         <!-- TARJETA 10: GoldenEye 007 -->
-        <a href="https://www.retrogames.cc/n64-games/007-goldeneye-usa.html" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTECd5jm_nRgwy3Pei43LNsOFRf6mi_iJPcsRmn77a3I6dtJGBDFswKM44&s=10" alt="GoldenEye 007">
-            <div class="game-info">
-                <span class="platform-tag">Emulador</span>
-                <h3>GoldenEye 007</h3>
-                <p>Controlas al agente secreto James Bond (007), quien debe detener al sindicato criminal JANUS.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="goldeneye" data-categoria="dos">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'goldeneye')" title="Favorito">★</button>
+            <a href="https://www.retrogames.cc/n64-games/007-goldeneye-usa.html" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTECd5jm_nRgwy3Pei43LNsOFRf6mi_iJPcsRmn77a3I6dtJGBDFswKM44&s=10" alt="GoldenEye 007">
+                <div class="game-info">
+                    <span class="platform-tag">Emulador</span>
+                    <h3>GoldenEye 007</h3>
+                    <p>Controlas al agente secreto James Bond (007), quien debe detener al sindicato criminal JANUS.</p>
+                </div>
+            </a>
+        </div>
         
         <!-- TARJETA 11: NZP -->
-        <a href="https://nzp.gay/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Y8XLYmnZnXnbkb_2ly3Zk7KxfU56zbxNkGB7VY8D4A&s" alt="NZP">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Nazi Zombie Portable</h3>
-                <p>Una versión gratuita y de código abierto (demake) del famoso modo zombis de Call of Duty: World at War.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="nzp" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'nzp')" title="Favorito">★</button>
+            <a href="https://nzp.gay/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Y8XLYmnZnXnbkb_2ly3Zk7KxfU56zbxNkGB7VY8D4A&s" alt="NZP">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>Nazi Zombie Portable</h3>
+                    <p>Una versión gratuita y de código abierto (demake) del famoso modo zombis de Call of Duty: World at War.</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 12: Granny -->
-        <a href="https://grannyonline.io/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST-OFaIuf0v2NJGoMLX5upQ9f3IM60yserrUaSA62L8A&s" alt="Granny">
-            <div class="game-info">
-                <span class="platform-tag">Web</span>
-                <h3>Granny</h3>
-                <p>Granny es un popular videojuego independiente de terror y supervivencia en primera persona donde debes escapar de una siniestra casa en un plazo de cinco días.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="granny" data-categoria="web">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'granny')" title="Favorito">★</button>
+            <a href="https://grannyonline.io/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST-OFaIuf0v2NJGoMLX5upQ9f3IM60yserrUaSA62L8A&s" alt="Granny">
+                <div class="game-info">
+                    <span class="platform-tag">Web</span>
+                    <h3>Granny</h3>
+                    <p>Granny es un popular juego independiente de terror y supervivencia en primera persona donde debes escapar.</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 13: Fnaf -->
-        <a href="https://fnafgame.io/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQDBjFp50_PzT-P7ygvTUUkTjJoff1tr63ooze-Morl0kSj-7GNNFtizczdHfAKihMYlp9QeeBXOmnzZ_2IkqdSE5lhTo-N6fXwQdWFAQ&s=10" alt="Fnaf">
-            <div class="game-info">
-                <span class="platform-tag">Web</span>
-                <h3>Five Nights at Freddy's</h3>
-                <p>Asumes el rol de un guardia nocturno que debe sobrevivir cinco noches vigilando cámaras y administrando energía.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="fnaf" data-categoria="web">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'fnaf')" title="Favorito">★</button>
+            <a href="https://fnafgame.io/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQDBjFp50_PzT-P7ygvTUUkTjJoff1tr63ooze-Morl0kSj-7GNNFtizczdHfAKihMYlp9QeeBXOmnzZ_2IkqdSE5lhTo-N6fXwQdWFAQ&s=10" alt="Fnaf">
+                <div class="game-info">
+                    <span class="platform-tag">Web</span>
+                    <h3>Five Nights at Freddy's</h3>
+                    <p>Asumes el rol de un guardia nocturno que debe sobrevivir cinco noches vigilando cámaras y energía.</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 14: Geometry Dash-->
-        <a href="https://geometrydash-pc.com/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHqaQT6t7tGhfDVuD67US2evQi4_xAjt0hTaqTOwFb96ncjtov8kKJCpc&s=10" alt="Geometry Dash">
-            <div class="game-info">
-                <span class="platform-tag">Web</span>
-                <h3>Geometry Dash</h3>
-                <p>Geometry Dash es un videojuego de plataformas y videojuego rítmico creado en 2013 por el desarrollador sueco Robert (Robtop).</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="geometry-dash" data-categoria="web">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'geometry-dash')" title="Favorito">★</button>
+            <a href="https://geometrydash-pc.com/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHqaQT6t7tGhfDVuD67US2evQi4_xAjt0hTaqTOwFb96ncjtov8kKJCpc&s=10" alt="Geometry Dash">
+                <div class="game-info">
+                    <span class="platform-tag">Web</span>
+                    <h3>Geometry Dash</h3>
+                    <p>Geometry Dash es un videojuego de plataformas y ritmo creado por el desarrollador Robert (Robtop).</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 15: TNT -->
-        <a href="https://cjdgrevival.com/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK0KJEZ0LPGh2E5edhYrJcWTvskkYam_6sAOgYJiwM1Q&s=10" alt="Taiko no Tatsujin">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Taiko no Tatsujin</h3>
-                <p>Taiko no Tatsujin es una popular serie de videojuegos musicales de ritmo creada por Bandai Namco donde golpeas un tambor tradicional japonés al ritmo de la música.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="taiko" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'taiko')" title="Favorito">★</button>
+            <a href="https://cjdgrevival.com/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQK0KJEZ0LPGh2E5edhYrJcWTvskkYam_6sAOgYJiwM1Q&s=10" alt="Taiko no Tatsujin">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>Taiko no Tatsujin</h3>
+                    <p>Juego musical de ritmo creado por Bandai Namco donde golpeas un tambor tradicional al ritmo de la música.</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 16: DDLC -->
-        <a href="https://selenite.cc/resources/semag/ddlcplus/index.html" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRveAs4oYOWobkvhqBiNq8Ly4F8dpLmKaP8cDjDytYnyw&s=10" alt="DDLC">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Doki Doki Literature Club</h3>
-                <p>(DDLC) es una novela visual de terror psicológico que simula un tierno juego de citas con estética de anime, pero que oculta una historia muy oscura y perturbadora.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="ddlc" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'ddlc')" title="Favorito">★</button>
+            <a href="https://selenite.cc/resources/semag/ddlcplus/index.html" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRveAs4oYOWobkvhqBiNq8Ly4F8dpLmKaP8cDjDytYnyw&s=10" alt="DDLC">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+<h3>Doki Doki Literature Club</h3>
+                    <p>Novela visual de terror psicológico que simula un juego de citas, pero oculta una historia muy oscura.</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 17: AC -->
-        <a href="https://rgc.zone/ports/ac-webport-main/index.html" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwNwBFPSNvAJccIYBDTxAoHlnpDovcOlj4iBG_SkefKRSeMLgErSGG8Fg5&s=10" alt="Animal Crossing">
-            <div class="game-info">
-                <span class="platform-tag">Emulador</span>
-                <h3>Animal Crossing</h3>
-                <p>Animal Crossing es un juego de simulación de vida donde te mudas a un pueblo lleno de animales parlantes y vives a tu propio ritmo.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="animal-crossing" data-categoria="dos">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'animal-crossing')" title="Favorito">★</button>
+            <a href="https://rgc.zone/ports/ac-webport-main/index.html" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwNwBFPSNvAJccIYBDTxAoHlnpDovcOlj4iBG_SkefKRSeMLgErSGG8Fg5&s=10" alt="Animal Crossing">
+                <div class="game-info">
+                    <span class="platform-tag">Emulador</span>
+                    <h3>Animal Crossing</h3>
+                    <p>Simulación de vida donde te mudas a un pueblo lleno de animales parlantes y vives a tu propio ritmo.</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 18: Quake 2 -->
-        <a href="https://rgc.zone/ports/Q2web/index.html" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrorBUVU0rbxJE5zcMjPBurlTfK9UboQ00HNsARfIF3k6NLTOM7CVbMSA&s=10" alt="Quake 2">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Quake 2</h3>
-                <p>Quake 2 narra una cruenta guerra de supervivencia y venganza contra una amenaza alienígena biomecánica.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="quake2" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'quake2')" title="Favorito">★</button>
+            <a href="https://rgc.zone/ports/Q2web/index.html" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrorBUVU0rbxJE5zcMjPBurlTfK9UboQ00HNsARfIF3k6NLTOM7CVbMSA&s=10" alt="Quake 2">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>Quake 2</h3>
+                    <p>Narra una cruenta guerra de supervivencia y venganza contra una amenaza alienígena biomecánica.</p>
+                </div>
+            </a>
+        </div>
 
         <!-- TARJETA 19: SMB -->
-        <a href="https://monkeyball-online.pages.dev/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjA1W_xRufaZwMyVODTp2ns7mss3cjq8Hgc9_Xl_4MxnTs3fQSDRtZjSA&s=10" alt="Super Monkey Ball">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Super Monkey Ball</h3>
-                <p>Super Monkey trata de guiar a un mono dentro de una bola transparente a través de plataformas suspendidas en el aire hasta llegar a la meta antes de que se acabe el tiempo..</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="monkey-ball" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'monkey-ball')" title="Favorito">★</button>
+            <a href="https://monkeyball-online.pages.dev/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjA1W_xRufaZwMyVODTp2ns7mss3cjq8Hgc9_Xl_4MxnTs3fQSDRtZjSA&s=10" alt="Super Monkey Ball">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>Super Monkey Ball</h3>
+                    <p>Guía a un mono dentro de una bola transparente a través de plataformas suspendidas hasta la meta.</p>
+                </div>
+            </a>
+        </div>
         
         <!-- TARJETA 20: Tekken 3 -->
-        <a href="https://www.retrogames.cc/psx-games/tekken-3.html" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSNQ8cjK83qCHQZod3nk6srk-XtzthLWnm3XfC-f-3AUoKKs2rSiV03j0&s=10" alt="Tekken 3">
-            <div class="game-info">
-                <span class="platform-tag">Emulador</span>
-                <h3>Tekken 3</h3>
-                <p>Tekken 3 es un legendario videojuego de lucha en el que Heihachi Mishima organiza un nuevo torneo de artes marciales para atraer y capturar a Ogre.</p>
-            </div>
-        </a>
+        <div class="game-card" data-id="tekken3" data-categoria="dos">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'tekken3')" title="Favorito">★</button>
+            <a href="https://www.retrogames.cc/psx-games/tekken-3.html" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSNQ8cjK83qCHQZod3nk6srk-XtzthLWnm3XfC-f-3AUoKKs2rSiV03j0&s=10" alt="Tekken 3">
+                <div class="game-info">
+                    <span class="platform-tag">Emulador</span>
+                    <h3>Tekken 3</h3>
+                    <p>Legendario videojuego de lucha en el que Heihachi Mishima organiza un nuevo torneo de artes marciales.</p>
+                </div>
+            </a>
+        </div>
         
-       <!-- TARJETA 21: SF3: TS -->
-        <a href="https://www.retrogames.cc/arcade-games/street-fighter-iii-3rd-strike:-fight-for-the-future-usa-990608.html" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR__BSGDEMMzwatU1qDSXo1jAZmg-JztWs5rGPTfZijfl-4fEYy88lSS8om&s=10" alt="SF3: TS">
-            <div class="game-info">
-                <span class="platform-tag">Emulador</span>
-                <h3>Street Fighter 3: Third Strike</h3>
-                <p>Una secta milenaria liderada por Gill y su hermano Urien busca purificar el mundo y crear una utopía bajo su control absoluto.</p>
-            </div>
-        </a>
+        <!-- TARJETA 21: SF3: TS -->
+        <div class="game-card" data-id="sf3" data-categoria="dos">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'sf3')" title="Favorito">★</button>
+            <a href="https://www.retrogames.cc/arcade-games/street-fighter-iii-3rd-strike:-fight-for-the-future-usa-990608.html" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR__BSGDEMMzwatU1qDSXo1jAZmg-JztWs5rGPTfZijfl-4fEYy88lSS8om&s=10" alt="SF3: TS">
+                <div class="game-info">
+                    <span class="platform-tag">Emulador</span>
+                    <h3>Street Fighter 3: Third Strike</h3>
+                    <p>Una secta milenaria liderada por Gill y su hermano Urien busca purificar el mundo y crear una utopía.</p>
+                </div>
+            </a>
+        </div>
 
-       <!-- TARJETA 22: KOF 98 -->
-        <a href="https://www.retrogames.cc/arcade-games/the-king-of-fighters-98-the-slugfest-king-of-fighters-98-dream-match-never-ends-ngm-2420.html" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSQqslL2emDpsknSK1VGDkYW-LceWITGf7sxAhHg5fdQ&s=10" alt="KOF 98">
-            <div class="game-info">
-                <span class="platform-tag">Emulador</span>
-                <h3>The King of Fighters '98</h3>
-                <p>KOF '98 es el quinto juego de la saga y está considerado por muchos como el mejor y más equilibrado juego de lucha clásica de la historia.
-</p>
-            </div>
-        </a>
+        <!-- TARJETA 22: KOF 98 -->
+        <div class="game-card" data-id="kof98" data-categoria="dos">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'kof98')" title="Favorito">★</button>
+            <a href="https://www.retrogames.cc/arcade-games/the-king-of-fighters-98-the-slugfest-king-of-fighters-98-dream-match-never-ends-ngm-2420.html" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSQqslL2emDpsknSK1VGDkYW-LceWITGf7sxAhHg5fdQ&s=10" alt="KOF 98">
+                <div class="game-info">
+                    <span class="platform-tag">Emulador</span>
+                    <h3>The King of Fighters '98</h3>
+                    <p>Considerado por muchos como el mejor y más equilibrado juego de lucha clásica de la historia.</p>
+                </div>
+            </a>
+        </div>
 
-       <!-- TARJETA 23: Postal 1 -->
-        <a href="https://playpostal.com/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv2tbnOn6im5-A6tYMCVPihXvKRNQs5y12WHKgp99cPQ&s=10" alt="Postal 1">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>POSTAL 1997</h3>
-                <p>Postal Dude, al creer que los habitantes de su pueblo (Paradise) están infectados o locos, sufre un brote psicótico y decide emprender una cruzada violenta para "limpiar" el área, interpretando sus actos en un diario como una defensa propia o retribución divina.</p>
-            </div>
-        </a> 
+        <!-- TARJETA 23: Postal 1 -->
+        <div class="game-card" data-id="postal1" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'postal1')" title="Favorito">★</button>
+            <a href="https://playpostal.com/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv2tbnOn6im5-A6tYMCVPihXvKRNQs5y12WHKgp99cPQ&s=10" alt="Postal 1">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>POSTAL 1997</h3>
+                    <p>Postal Dude sufre un brote psicótico y decide emprender una cruzada violenta para "limpiar" Paradise.</p>
+                </div>
+            </a>
+        </div> 
 
-        <!-- TARJETA 23: TTD -->
-        <a href="https://openttdonline.com/play/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUUETWJfUdwT5MvA_7y8d97MXL23m23JcmdrOmLA_RDg&s=10" alt="TTD">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Transport Tycoon Deluxe</h3>
-                <p>Transport Tycoon Deluxe es un clásico videojuego de simulación empresarial y estrategia lanzado en 1995 por Chris Sawyer, en el que controlas una compañía de transporte para hacerla lo más rentable posible.</p>
-            </div>
-        </a>
+        <!-- TARJETA 24: TTD -->
+        <div class="game-card" data-id="ttd" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'ttd')" title="Favorito">★</button>
+            <a href="https://openttdonline.com/play/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUUETWJfUdwT5MvA_7y8d97MXL23m23JcmdrOmLA_RDg&s=10" alt="TTD">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>Transport Tycoon Deluxe</h3>
+                    <p>Simulación empresarial en el que controlas una compañía de transporte para hacerla lo más rentable posible.</p>
+                </div>
+            </a>
+        </div>
 
-<!-- TARJETA 24: Diablo -->
-        <a href="https://d07riv.github.io/diabloweb/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzH3IlFaaDzA8sKqGCa-aOTtzHDew0ylAY9bobFoNVHvs7dsPpo0gDbas&s=10" alt="Diablo">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>Diablo</h3>
-                <p>Diablo 1 trata sobre un héroe solitario que debe descender a las oscuras mazmorras bajo la catedral de Tristram para derrotar a Diablo, el Señor del Terror.</p>
-            </div>
-        </a>
-
-<!-- TARJETA 25: Metal Slug X -->
-<a href="https://www.retrogames.cc/psx-games/metal-slug-x.html" target="_blank" class="game-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTys6kXpQeSluiFqFmivz_VW5ZdrUG5IAAlO0_pc5TAnw&s=10" alt="Metal Slug X">
-    <div class="game-info">
-        <span class="platform-tag">Emulador</span>
-        <h3>Metal Slug X</h3>
-        <p>Avanza disparando contra hordas de enemigos, vehículos y jefes gigantescos en este clásico arcade.</p>
-    </div>
-</a>
-
-<!-- TARJETA 26: Heroes of Might and Magic III -->
-<a href="https://heros-3.com/" target="_blank" class="game-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvyR59RQ6UxyswE3e-ftrrDON5rCB1idRWMnk2txcPXrCbX3E4MfolQM8p&s=10" alt="Heroes of Might and Magic III">
-    <div class="game-info">
-        <span class="platform-tag">Web Port</span>
-        <h3>Heroes of Might & Magic III</h3>
-        <p>Recluta criaturas místicas, explora mapas gigantes y domina reinos en combates tácticos por turnos.</p>
-    </div>
-</a>
-
-<!-- TARJETA 27: Duke Nukem 3D -->
-<a href="https://dos.zone/duke-nukem-3d-1996/" target="_blank" class="game-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD7AZ5rYCcMwzh8jlYO6rW1G2JXoy1QkfFFgXU_6eYtiD0J5aSjKySMlwg&s=10" alt="Duke Nukem 3D">
-    <div class="game-info">
-        <span class="platform-tag">DOS / Emulador</span>
-        <h3>Duke Nukem 3D</h3>
-        <p>Enfréntate a invasores alienígenas con un arsenal pesado en las calles iluminadas de Los Ángeles.</p>
-    </div>
-</a>
-
-<!-- TARJETA 28: Theme Hospital -->
-<a href="https://dos.zone/theme-hospital/" target="_blank" class="game-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnywwfVC05ducnOTL4g8feh3PBM4SsKpkJaNaNi7t1LRdKL_g2u0EKELxU&s=10" alt="Theme Hospital">
-    <div class="game-info">
-        <span class="platform-tag">DOS / Emulador</span>
-        <h3>Theme Hospital</h3>
-        <p>Gestiona y expande tu propio hospital mientras curas a pacientes con las enfermedades más disparatadas.</p>
-    </div>
-</a>
-
-<!-- TARJETA 29: Crash Team Racing -->
-<a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV6h6-RlqrclPy4Ij0bCG6ECPIwgztGheIDFaEzYBJJOhbMID_7tXqXepf&s=10" target="_blank" class="game-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjRQ6vHQGH684vilSAmJdgykB84gVFBCOKgF0k0YxOK98GZ7fVM7veRjY&s=10" alt="Crash Team Racing">
-    <div class="game-info">
-        <span class="platform-tag">Emulador</span>
-        <h3>Crash Team Racing</h3>
-        <p>Ayuda a Crash Bandicoot y a sus amigos a ganar las carreras para salvar la Tierra del malvado Nitros Oxide.</p>
-    </div>
-</a>
-
-<!-- TARJETA 30: Top Gear -->
-<a href="https://www.retrogames.cc/snes-games/top-gear-usa.html" target="_blank" class="game-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAic7r0Hjo8xr3GjnZScpLb_Z3EymXmuHB7C1HlyJQfg&s" alt="Top Gear">
-    <div class="game-info">
-        <span class="platform-tag">Emulador</span>
-        <h3>Top Gear</h3>
-        <p>Acelera a fondo por autopistas de todo el mundo, administra tu combustible y disfruta de su mítica música.</p>
-    </div>
-</a>
-
-<!-- TARJETA 31: Pepsiman -->
-        <a href="https://www.retrogames.cc/psx-games/pepsiman-japan.html" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMcrPAmMaPuLSusUSu2cnkMsOTUKSWoOlpYCahdsAUcK7GUc72vcX05Dg&s=10" alt="Pepsiman">
-            <div class="game-info">
-                <span class="platform-tag">Emulador</span>
-                <h3>Pepsiman</h3>
-                <p>Pepsiman para la PS1 es un juego de acción y plataformas de tipo auto-runner donde controlas a la icónica mascota de Pepsi en su misión de llevarle refresco a personas sedientas.</p>
-            </div>
-        </a>
-
-       <!-- TARJETA 31: COD:Z -->
-        <a href="https://zm.luckeysystems.com" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYPS69Je6ucXuKF3BdLDext81GAtL-crDbHVJnkTs43g&s=10" alt="Kino der Toten">
-            <div class="game-info">
-                <span class="platform-tag">Web Port</span>
-                <h3>CoD: Kino der Toten</h3>
-                <p>Version web de Kino der Toten de Call of Duty Zombies, un modo de juego cooperativo de supervivencia donde los jugadores deben resistir hordas interminables de muertos vivientes que aumentan de dificultad en cada ronda.</p>
-            </div>
-        </a>
-
-<!-- TARJETA 32: Wolfenstein 3D -->
-<a href="https://dos.zone/wolfenstein-3d-may-05-1992/" target="_blank" class="game-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTfToPf3xNIfYqLXqj_fsHGWf7DmqADz10eSYtY4Zrhg&s" alt="Wolfenstein 3D">
-    <div class="game-info">
-        <span class="platform-tag">DOS / Emulador</span>
-        <h3>Wolfenstein 3D</h3>
-        <p>Escapa del castillo Wolfenstein abriéndote paso a disparos en el clásico FPS que dio origen al género.</p>
-    </div>
-</a>
-
-<!-- TARJETA 33: Ultimate Mortal Kombat 3 -->
-<a href="https://www.retrogames.cc/arcade-games/ultimate-mortal-kombat-3-rev-1-2.html" target="_blank" class="game-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhBNI_k8Iw1osF7Hkx8vjtuSgQCM9rXG1Eub82vERt4A&s=10" alt="Ultimate Mortal Kombat 3">
-    <div class="game-info">
-        <span class="platform-tag">Emulador</span>
-        <h3>Ultimate Mortal Kombat 3</h3>
-        <p>Elige a Scorpion, Sub-Zero y docenas de luchadores en el juego de peleas más sangriento y ágil de los arcade.</p>
-    </div>
-</a>
-
-<!-- TARJETA 34: DOOM II -->
-<a href="https://dos.zone/doom-ii-oct-10-1994/" target="_blank" class="game-card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdlxyBUhVM6Zic9jhxoMRlh9FHGdRyspVGeEuAPRKBwA&s=10" alt="DOOM II">
-    <div class="game-info">
-        <span class="platform-tag">DOS / Emulador</span>
-        <h3>DOOM II</h3>
-        <p>Abrete paso a escopetazos entre hordas demoníacas en este legendario shooter en primera persona.</p>
-    </div>
-</a>
-
-<!-- TARJETA 35: RCTD -->
-        <a href="https://dos.zone/rollercoaster-tycoon-deluxe/" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbTuYsFPYlm6PPRULRKpGJL5Tq4m7WLfURKrwnmxXYjQ&s" alt="RCTD">
-            <div class="game-info">
-                <span class="platform-tag">DOS / Emulador</span>
-                <h3>Roller Coaster Tycoon Deluxe</h3>
-                <p>RollerCoaster Tycoon: Deluxe es un clásico videojuego de simulación y gestión empresarial donde asumes el papel de gerente de un parque de atracciones..</p>
-            </div>
-        </a>
-        
-        <!-- TARJETA Próximamente -->
-        <a href="#" target="_blank" class="game-card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVryxwRSttAUkIYRzOaqrsWQk9iZRYRlu5S-iQr1SuoA&s=10" alt="Próximamente">
-            <div class="game-info">
-                <span class="platform-tag">Pronto</span>
-                <h3>Próximamente</h3>
-                <p>Más juegos serán agregados a este catálogo pronto.</p>
-            </div>
-        </a>
+        <!-- TARJETA 25: Diablo 1 -->
+        <div class="game-card" data-id="diablo1" data-categoria="port">
+            <button class="fav-btn" onclick="toggleFavorito(event, 'diablo1')" title="Favorito">★</button>
+            <a href="https://d07riv.github.io/diabloweb/" target="_blank" class="card-link">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzH3IlFaaDzA8sKqGCa-aOTtzHDew0ylAY9bobFoNVHvs7dsPpo0gDbas&s=10" alt="Diablo 1">
+                <div class="game-info">
+                    <span class="platform-tag">Web Port</span>
+                    <h3>Diablo</h3>
+                    <p>Encarna a un héroe solitario para descender a las oscuras profundidades de Tristram y derrotar a Diablo.</p>
+                </div>
+            </a>
+        </div>
 
     </div>
 
-    
     <script>
-        function filtrarJuegos(categoria, boton) {
-            
-            const botones = document.querySelectorAll('.filter-btn');
-            botones.forEach(btn => btn.classList.remove('active'));
-            boton.classList.add('active');
+        let misFavoritos = JSON.parse(localStorage.getItem('baul_favoritos')) || [];
+        let categoriaActual = 'todos';
 
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarEstrellas();
+            filtrarJuegos();
+        });
+
+        function toggleFavorito(event, juegoId) {
+            event.stopPropagation();
+
+            if (misFavoritos.includes(juegoId)) {
+                misFavoritos = misFavoritos.filter(id => id !== juegoId);
+            } else {
+                misFavoritos.push(juegoId);
+            }
+
+            localStorage.setItem('baul_favoritos', JSON.stringify(misFavoritos));
+            actualizarEstrellas();
+
+            if (categoriaActual === 'favoritos') {
+                filtrarJuegos();
+            }
+        }
+
+        function actualizarEstrellas() {
             const tarjetas = document.querySelectorAll('.game-card');
             tarjetas.forEach(tarjeta => {
-                const etiqueta = tarjeta.querySelector('.platform-tag');
-                if (!etiqueta) return;
+                const id = tarjeta.getAttribute('data-id');
+                const btn = tarjeta.querySelector('.fav-btn');
+                if (btn) {
+                    if (misFavoritos.includes(id)) {
+                        btn.classList.add('is-favorite');
+                    } else {
+                        btn.classList.remove('is-favorite');
+                    }
+                }
+            });
+        }
 
-                const textoEtiqueta = etiqueta.textContent.toLowerCase();
+        function setCategoria(cat, boton) {
+            categoriaActual = cat;
 
-                if (categoria === 'todos') {
-                    tarjeta.style.display = 'flex';
-                } else if (categoria === 'dos' && (textoEtiqueta.includes('dos') || textoEtiqueta.includes('emulador'))) {
-                    tarjeta.style.display = 'flex';
-                } else if (categoria === 'port' && textoEtiqueta.includes('port')) {
-                    tarjeta.style.display = 'flex';
-                } else if (categoria === 'web' && (textoEtiqueta.includes('canvas') || (textoEtiqueta.includes('web') && !textoEtiqueta.includes('port')))) {
+            // Actualizar resaltado de botones
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            if (boton) boton.classList.add('active');
+
+            filtrarJuegos();
+        }
+
+        // Búsqueda por texto combinada con categoría/favoritos
+        function filtrarJuegos() {
+            const busqueda = document.getElementById('searchInput').value.toLowerCase().trim();
+            const tarjetas = document.querySelectorAll('.game-card');
+
+            tarjetas.forEach(tarjeta => {
+                const id = tarjeta.getAttribute('data-id');
+                const categoria = tarjeta.getAttribute('data-categoria');
+                const textoTarjeta = tarjeta.innerText.toLowerCase();
+
+                const coincideTexto = textoTarjeta.includes(busqueda);
+                let coincideCategoria = false;
+
+                if (categoriaActual === 'todos') {
+                    coincideCategoria = true;
+                } else if (categoriaActual === 'favoritos') {
+                    coincideCategoria = misFavoritos.includes(id);
+                } else if (categoriaActual === categoria) {
+                    coincideCategoria = true;
+                }
+
+                if (coincideTexto && coincideCategoria) {
                     tarjeta.style.display = 'flex';
                 } else {
                     tarjeta.style.display = 'none';
@@ -602,5 +668,6 @@
     </script>
 
 </body>
-    </html>
-    
+</html
+
+<xd>
